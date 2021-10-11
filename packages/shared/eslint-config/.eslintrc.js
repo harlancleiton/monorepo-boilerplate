@@ -27,6 +27,9 @@ module.exports = {
   ],
   rules: {
     'prettier/prettier': 'error',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'no-console': 'warn',
     semi: 'off',
     'import-helpers/order-imports': [
@@ -36,8 +39,8 @@ module.exports = {
         groups: [
           '/^react/',
           '/^@nestjs//',
-          'module',
           '/^~/',
+          'module',
           [('parent', 'sibling', 'index')]
         ],
         alphabetize: {
