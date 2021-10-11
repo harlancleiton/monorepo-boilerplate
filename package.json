@@ -1,0 +1,22 @@
+{
+  "name": "monorepo-boilerplate",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "Harlan Cleiton <harlancleiton@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "packages/shared/*"
+    ]
+  },
+  "scripts": {
+    "dev": "yarn workspaces run dev"
+  },
+  "devDependencies": {
+    "@monorepo/eslint-config": "*",
+    "@types/jest": "^27.0.2",
+    "typescript": "^4.4.3"
+  }
+}
