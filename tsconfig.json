@@ -6,6 +6,10 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "useUnknownInCatchVariables": false,
+    "lib": [
+      "es2015"
+    ],
     "types": [
       "@types/jest"
     ]

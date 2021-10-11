@@ -1,9 +1,10 @@
 {
   "name": "@monorepo/http",
   "version": "0.1.0",
-  "main": "src/main.ts",
+  "main": "src/index.ts",
   "license": "MIT",
   "scripts": {
+    "prebuild": "rimraf dist",
     "build": "tsc",
     "dev": "echo >> /dev/null",
     "start": "echo >> /dev/null",
@@ -11,5 +12,11 @@
     "precommit": "echo >> /dev/null",
     "test": "echo >> /dev/null",
     "test:e2e": "echo >> /dev/null"
+  },
+  "dependencies": {
+    "axios": "^0.22.0"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2"
   }
 }
