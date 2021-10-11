@@ -12,7 +12,9 @@
     ]
   },
   "scripts": {
-    "dev": "yarn workspaces run dev"
+    "dev,": "yarn workspaces run dev",
+    "format": "yarn workspaces run format",
+    "lint": "yarn workspaces run lint"
   },
   "devDependencies": {
     "@monorepo/eslint-config": "*",

@@ -18,10 +18,38 @@ module.exports = {
     ecmaVersion: 13,
     sourceType: 'module'
   },
-  plugins: ['react', 'react-hooks', '@typescript-eslint', 'prettier'],
+  plugins: [
+    'react',
+    'react-hooks',
+    '@typescript-eslint',
+    'prettier',
+    'import-helpers'
+  ],
   rules: {
     'prettier/prettier': 'error',
     'no-console': 'warn',
-    semi: 'off'
+    semi: 'off',
+    'import-helpers/order-imports': [
+      'warn',
+      {
+        newlinesBetween: 'always',
+        groups: [
+          '/^react/',
+          '/^@nestjs//',
+          'module',
+          '/^~/',
+          [('parent', 'sibling', 'index')]
+        ],
+        alphabetize: {
+          order: 'asc',
+          ignoreCase: true
+        }
+      }
+    ]
+  },
+  settings: {
+    react: {
+      version: 'detect'
+    }
   }
 };
