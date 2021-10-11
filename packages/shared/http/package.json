@@ -1,0 +1,15 @@
+{
+  "name": "@monorepo/http",
+  "version": "0.1.0",
+  "main": "src/main.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "dev": "echo >> /dev/null",
+    "start": "echo >> /dev/null",
+    "lint": "echo >> /dev/null",
+    "precommit": "echo >> /dev/null",
+    "test": "echo >> /dev/null",
+    "test:e2e": "echo >> /dev/null"
+  }
+}
