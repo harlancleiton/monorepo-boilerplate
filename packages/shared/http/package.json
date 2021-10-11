@@ -7,11 +7,7 @@
     "prebuild": "rimraf dist",
     "build": "tsc",
     "dev": "echo >> /dev/null",
-    "start": "echo >> /dev/null",
-    "lint": "echo >> /dev/null",
-    "precommit": "echo >> /dev/null",
-    "test": "echo >> /dev/null",
-    "test:e2e": "echo >> /dev/null"
+    "lint": "echo >> /dev/null"
   },
   "dependencies": {
     "axios": "^0.22.0"
