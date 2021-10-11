@@ -14,15 +14,16 @@ coverage
 *.lcov
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
-/build
-/dist
+/**/build
+/**/dist
 
 # Dependency directories
-/node_modules/
+/**/node_modules/
 
 # dotenv environment variables file
-.env
-.env.test
+/**/.env
+/**/.env.*
+/**/!.env.example
 
 # OS Specific
 .DS_Store
