@@ -16,6 +16,9 @@
     "format": "yarn workspaces run format",
     "lint": "yarn workspaces run lint"
   },
+  "dependencies": {
+    "react": "^17.0.2"
+  },
   "devDependencies": {
     "@monorepo/eslint-config": "*",
     "@types/jest": "^27.0.2",
