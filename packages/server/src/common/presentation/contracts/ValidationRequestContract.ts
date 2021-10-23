@@ -1,7 +1,7 @@
 import { RequestContract } from '~/common';
 
-import { ValidationError } from '../errors';
+import { ValidationResultContract } from './ValidationResultContract';
 
 export interface ValidationRequestContract {
-  validate(request: RequestContract): Promise<ValidationError[] | void>;
+  validate(request: RequestContract): Promise<ValidationResultContract>;
 }

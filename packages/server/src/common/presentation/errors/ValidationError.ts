@@ -1,17 +1,29 @@
 export class ValidationError {
   constructor(
     public field: string,
-    public value: string,
-    public validation: ValidationError.Rules,
+    public value: ValidationError.FieldValues,
+    public validation?: ValidationError.Rules,
     public children: ValidationError[] = []
   ) {}
 }
 
 export namespace ValidationError {
-  export type Rules = Partial<{
-    isEmail: string;
-    isString: string;
+  export type FieldValues =
+    | object
+    | string
+    | number
+    | boolean
+    | null
+    | undefined
+    | FieldValues[];
 
-    [key: string]: string;
+  export type Message = string;
+
+  export type Rules = Partial<{
+    isEmail: Message;
+    isString: Message;
+    required: Message;
+
+    [key: string]: Message;
   }>;
 }
