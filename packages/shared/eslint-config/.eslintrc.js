@@ -31,6 +31,14 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/explicit-member-accessibility': [
+      'error',
+      {
+        overrides: {
+          constructors: 'no-public'
+        }
+      }
+    ],
     'no-console': 'warn',
     semi: 'off',
     'import-helpers/order-imports': [
