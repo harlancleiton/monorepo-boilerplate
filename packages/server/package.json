@@ -7,7 +7,7 @@
     "prebuild": "rimraf dist",
     "build": "tsc",
     "dev": "ts-node-dev --inspect --clear --transpile-only --no-notify -r tsconfig-paths/register src/main.ts",
-    "lint": "echo >> /dev/null"
+    "lint": "eslint . --ext=.ts --fix"
   },
   "dependencies": {
     "express": "^4.17.1"
