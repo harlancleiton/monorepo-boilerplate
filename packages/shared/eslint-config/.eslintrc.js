@@ -30,6 +30,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
     'no-console': 'warn',
     semi: 'off',
     'import-helpers/order-imports': [
@@ -39,8 +40,8 @@ module.exports = {
         groups: [
           '/^react/',
           '/^@nestjs//',
-          '/^~/',
           'module',
+          '/^~/',
           [('parent', 'sibling', 'index')]
         ],
         alphabetize: {
