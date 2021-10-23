@@ -1,6 +1,7 @@
 import { Response } from 'express';
 
 import { ResponseContract } from '~/common';
+import { ValidationError } from '~/common/presentation/errors';
 
 export class ExpressResponseAdapter implements ResponseContract {
   constructor(private readonly response: Response) {}
@@ -17,8 +18,8 @@ export class ExpressResponseAdapter implements ResponseContract {
     this.response.status(204).json();
   }
 
-  public badRequest(body?: any): void {
-    this.response.status(400).json(body);
+  public badRequest(errors: ValidationError[]): void {
+    this.response.status(400).json({ errors });
   }
 
   public unauthorized(body?: any): void {

@@ -1,9 +1,11 @@
+import { ValidationError } from '../errors';
+
 export interface ResponseContract {
   ok(body: any): void;
   created(body: any): void;
   noContent(): void;
 
-  badRequest(body?: any): void;
+  badRequest(errors: ValidationError[]): void;
   unauthorized(body?: any): void;
   paymentRequired(body?: any): void;
   forbidden(body?: any): void;
