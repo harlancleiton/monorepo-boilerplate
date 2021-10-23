@@ -16,4 +16,8 @@ export class ExpressRequestAdapter implements RequestContract {
   param<T = string>(key: string, defaultValue?: T): T {
     return this.request.params[key] || (defaultValue as any);
   }
+
+  query<T = Record<string, string>>(): T {
+    return this.request.query as any;
+  }
 }

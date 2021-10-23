@@ -1,3 +1,3 @@
 export * from './ExpressRequestAdapter';
 export * from './ExpressResponseAdapter';
-export * from './expressRouteAdapter';
+export * from './ExpressRouteAdapter';
