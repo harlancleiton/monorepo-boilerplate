@@ -4,6 +4,6 @@ import { adaptRoute } from '~/common';
 
 import { makeRegisterController } from '../factories';
 
-export function registerRouter(router: Router) {
+export function applyRegisterRoutes(router: Router) {
   router.post('/users', adaptRoute(makeRegisterController()));
 }
