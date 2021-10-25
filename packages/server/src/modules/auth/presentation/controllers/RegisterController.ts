@@ -1,11 +1,11 @@
 import {
   ControllerContract,
   HttpContextContract,
-  ValidationRequestContract
+  RequestValidatorContract
 } from '~/common';
 
 export class RegisterController implements ControllerContract {
-  constructor(private readonly validation: ValidationRequestContract) {}
+  constructor(private readonly validation: RequestValidatorContract) {}
 
   public async handle({
     request,

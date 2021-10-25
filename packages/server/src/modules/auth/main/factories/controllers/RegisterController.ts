@@ -1,6 +1,6 @@
-import { ControllerContract, MockedValidationRequest } from '~/common';
+import { ControllerContract, MockedRequestValidator } from '~/common';
 import { RegisterController } from '~/modules/auth/presentation';
 
 export function makeRegisterController(): ControllerContract {
-  return new RegisterController(new MockedValidationRequest());
+  return new RegisterController(new MockedRequestValidator());
 }
