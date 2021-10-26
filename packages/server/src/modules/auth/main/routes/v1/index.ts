@@ -5,7 +5,7 @@ export default function (
   opts: FastifyPluginOptions,
   done: (err?: Error) => void
 ) {
-  fastify.register(import('./v1'), { prefix: 'v1' });
+  fastify.register(import('./register'), { ...opts, prefix: 'auth' });
 
   done();
 }

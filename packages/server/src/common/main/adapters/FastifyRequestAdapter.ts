@@ -1,16 +1,16 @@
-import { Request } from 'express';
+import { FastifyRequest } from 'fastify';
 
 import { RequestContract } from '~/common';
 
-export class ExpressRequestAdapter implements RequestContract {
-  constructor(private readonly request: Request) {}
+export class FastifyRequestAdapter implements RequestContract {
+  constructor(private readonly request: FastifyRequest) {}
 
   public body<T = any>(): T {
-    return this.request.body;
+    return this.request.body as T;
   }
 
   public params<T = Record<string, string>>(): T {
-    return this.request.params as any;
+    return this.request.params as T;
   }
 
   public param<T = string>(key: string, defaultValue?: T): T {

@@ -1,21 +1,11 @@
-import express, { Router } from 'express';
-
-import { authApplyRoutes } from './modules/auth';
-
-function applyRoutes(router: Router) {
-  authApplyRoutes(router);
-}
+import fastify from 'fastify';
 
 async function bootstrap() {
-  const app = express();
+  const server = fastify();
 
-  app.use(express.json());
+  server.register(import('~/modules/auth/main/routes'));
 
-  const router = Router();
-  applyRoutes(router);
-  app.use(router);
-
-  app.listen(3333, () => {
+  server.listen(3333, '0.0.0.0', () => {
     // eslint-disable-next-line no-console
     console.log('Server is running');
   });

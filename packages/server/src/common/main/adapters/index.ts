@@ -1,3 +1,3 @@
-export * from './ExpressRequestAdapter';
-export * from './ExpressResponseAdapter';
-export * from './ExpressRouteAdapter';
+export * from './FastifyReplyAdapter';
+export * from './FastifyRequestAdapter';
+export * from './FastifyRouteAdapter';

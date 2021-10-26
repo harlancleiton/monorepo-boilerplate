@@ -1,11 +1,14 @@
 import { FastifyInstance, FastifyPluginOptions } from 'fastify';
 
+import { fastifyAdaptRoute } from '~/common';
+import { makeRegisterController } from '~/modules/auth';
+
 export default function (
   fastify: FastifyInstance,
   opts: FastifyPluginOptions,
   done: (err?: Error) => void
 ) {
-  fastify.register(import('./v1'), { prefix: 'v1' });
+  fastify.post('/register', opts, fastifyAdaptRoute(makeRegisterController()));
 
   done();
 }
