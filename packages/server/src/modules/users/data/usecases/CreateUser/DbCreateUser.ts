@@ -1,7 +1,13 @@
 import { CreateUser, CreateUserModel, UserModel } from '~/modules/users/domain';
 
+import { UserRepository } from '../../repositories';
+
 export class DbCreateUser implements CreateUser {
-  public execute(payload: CreateUserModel): Promise<UserModel> {
-    throw new Error('Method not implemented.');
+  constructor(private readonly userRepository: UserRepository) {}
+
+  public async execute(payload: CreateUserModel): Promise<UserModel> {
+    await this.userRepository.create(payload);
+
+    return null;
   }
 }
