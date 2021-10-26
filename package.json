@@ -14,7 +14,8 @@
   "scripts": {
     "dev": "yarn workspaces run dev",
     "format": "yarn workspaces run format",
-    "lint": "yarn workspaces run lint"
+    "lint": "yarn workspaces run lint",
+    "test": "jest"
   },
   "dependencies": {
     "react": "^17.0.2"
