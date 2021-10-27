@@ -1,14 +1,17 @@
+import { HashContract } from '~/common';
 import { DbCreateUser, UserRepository } from '~/modules/users/data';
 import { factories } from '~/tests/factories';
-import { MockUserRepository } from '~/tests/mocks';
+import { MockHash, MockUserRepository } from '~/tests/mocks';
 
 describe('DbCreateUser', () => {
   let sut: DbCreateUser;
   let userRepository: UserRepository;
+  let hash: HashContract;
 
   beforeEach(() => {
     userRepository = new MockUserRepository();
-    sut = new DbCreateUser(userRepository);
+    hash = new MockHash();
+    sut = new DbCreateUser(userRepository, hash);
   });
 
   it('should be defined', () => {
@@ -23,5 +26,16 @@ describe('DbCreateUser', () => {
     await sut.execute(createUser);
 
     expect(userRepository.create).toBeCalledWith(createUser);
+  });
+
+  it('should calls hash.make with correct values', async () => {
+    const createUser = factories.users.createUser.build();
+    const expectedPassword = String(createUser.password);
+
+    jest.spyOn(hash, 'make');
+
+    await sut.execute(createUser);
+
+    expect(hash.make).toBeCalledWith(expectedPassword);
   });
 });
