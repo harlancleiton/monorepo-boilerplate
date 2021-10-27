@@ -1,5 +1,7 @@
 import { DbCreateUser, UserRepository } from '~/modules/users/data';
 
+import { factories } from '../../../../../factories';
+
 describe('DbCreateUser', () => {
   let sut: DbCreateUser;
   let userRepository: UserRepository;
@@ -14,18 +16,10 @@ describe('DbCreateUser', () => {
   });
 
   it('should calls usersRepository.create with correct values', async () => {
-    await sut.execute({
-      email: 'mail@mail.com',
-      firstName: 'Lorem',
-      lastName: 'Ipsum',
-      password: '123456'
-    });
+    const createUser = factories.users.createUser.build();
 
-    expect(userRepository.create).toBeCalledWith({
-      email: 'mail@mail.com',
-      firstName: 'Lorem',
-      lastName: 'Ipsum',
-      password: '123456'
-    });
+    await sut.execute(createUser);
+
+    expect(userRepository.create).toBeCalledWith(createUser);
   });
 });
