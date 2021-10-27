@@ -7,7 +7,7 @@ export class MockHash implements HashContract {
     return Promise.resolve(crypto.randomBytes(value.length).toString('hex'));
   }
 
-  public verify(hashedValue: string): Promise<boolean> {
-    return Promise.resolve(!!hashedValue);
+  public verify(hashedValue: string, plainTextValue: string): Promise<boolean> {
+    return Promise.resolve(hashedValue !== plainTextValue);
   }
 }

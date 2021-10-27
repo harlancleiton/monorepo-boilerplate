@@ -1,4 +1,4 @@
 export interface HashContract {
   make(value: string): Promise<string>;
-  verify(hashedValue: string): Promise<boolean>;
+  verify(hashedValue: string, plainTextValue: string): Promise<boolean>;
 }
