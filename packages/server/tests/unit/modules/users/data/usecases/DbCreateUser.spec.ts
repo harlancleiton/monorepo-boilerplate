@@ -1,12 +1,13 @@
 import { DbCreateUser, UserRepository } from '~/modules/users/data';
 import { factories } from '~/tests/factories';
+import { MockUserRepository } from '~/tests/mocks';
 
 describe('DbCreateUser', () => {
   let sut: DbCreateUser;
   let userRepository: UserRepository;
 
   beforeEach(() => {
-    userRepository = { create: jest.fn() };
+    userRepository = new MockUserRepository();
     sut = new DbCreateUser(userRepository);
   });
 
@@ -16,6 +17,8 @@ describe('DbCreateUser', () => {
 
   it('should calls usersRepository.create with correct values', async () => {
     const createUser = factories.users.createUser.build();
+
+    jest.spyOn(userRepository, 'create');
 
     await sut.execute(createUser);
 
