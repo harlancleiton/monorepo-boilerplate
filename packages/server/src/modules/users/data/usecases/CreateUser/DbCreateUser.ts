@@ -13,8 +13,7 @@ export class DbCreateUser implements CreateUser {
     const hashedPassword = await this.hash.make(payload.password);
     payload.password = hashedPassword;
 
-    await this.userRepository.create(payload);
-
-    return null;
+    const user = await this.userRepository.create(payload);
+    return user;
   }
 }
