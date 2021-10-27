@@ -1,6 +1,5 @@
 import { DbCreateUser, UserRepository } from '~/modules/users/data';
-
-import { factories } from '../../../../../factories';
+import { factories } from '~/tests/factories';
 
 describe('DbCreateUser', () => {
   let sut: DbCreateUser;
