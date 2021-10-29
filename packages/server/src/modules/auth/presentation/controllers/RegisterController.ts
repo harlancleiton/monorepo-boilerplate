@@ -3,9 +3,13 @@ import {
   HttpContextContract,
   RequestValidatorContract
 } from '~/common';
+import { CreateUser } from '~/modules/users/domain';
 
 export class RegisterController implements ControllerContract {
-  constructor(private readonly validation: RequestValidatorContract) {}
+  constructor(
+    private readonly createUser: CreateUser,
+    private readonly validation: RequestValidatorContract
+  ) {}
 
   public async handle({
     request,
@@ -15,8 +19,7 @@ export class RegisterController implements ControllerContract {
 
     if (errors.length) return response.badRequest(errors);
 
-    // eslint-disable-next-line no-console
-    console.log('payload: ', payload);
-    response.ok({ message: 'Hello World' });
+    const user = await this.createUser.execute(payload);
+    response.created(user);
   }
 }
