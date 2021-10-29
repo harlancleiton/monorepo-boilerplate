@@ -1,9 +1,11 @@
+import { appConfig } from '~/config/app';
+
 export async function startHttpServer() {
   const fastify = await (await import('fastify')).fastify();
 
   fastify.register(import('./routes/v1'), { prefix: 'v1' });
 
-  fastify.listen(process.env.PORT, process.env.HOST, (err, address) => {
+  fastify.listen(appConfig.port, appConfig.host, (err, address) => {
     if (err) {
       fastify.close();
       process.exit(1);
