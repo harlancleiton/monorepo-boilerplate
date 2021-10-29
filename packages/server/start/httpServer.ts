@@ -1,11 +1,9 @@
-import fastify from 'fastify';
-
 export async function startHttpServer() {
-  const server = fastify();
+  const fastify = await (await import('fastify')).fastify();
 
-  server.register(import('~/modules/auth/main/routes'));
+  fastify.register(import('./routes/v1'), { prefix: 'v1' });
 
-  server.listen(3333, '0.0.0.0', () => {
+  fastify.listen(3333, '0.0.0.0', () => {
     // eslint-disable-next-line no-console
     console.log('Server is running');
   });
