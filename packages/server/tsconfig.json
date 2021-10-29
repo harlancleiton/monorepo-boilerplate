@@ -6,6 +6,9 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
+      "~/config/*": [
+        "config/*"
+      ],
       "~/tests/*": [
         "tests/*"
       ],
