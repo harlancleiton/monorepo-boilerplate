@@ -9,6 +9,9 @@
       "~/config/*": [
         "config/*"
       ],
+      "~/start/*": [
+        "start/*"
+      ],
       "~/tests/*": [
         "tests/*"
       ],

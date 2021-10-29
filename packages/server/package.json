@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc -p ./tsconfig.build.json",
-    "dev": "ts-node-dev --inspect --clear --no-notify -r tsconfig-paths/register app/main.ts",
+    "dev": "ts-node-dev --inspect --clear --no-notify -r tsconfig-paths/register main.ts",
     "lint": "eslint . --ext=.ts --fix",
     "test": "jest"
   },

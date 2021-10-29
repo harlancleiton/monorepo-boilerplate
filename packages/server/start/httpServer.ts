@@ -1,6 +1,6 @@
 import fastify from 'fastify';
 
-async function bootstrap() {
+export async function startHttpServer() {
   const server = fastify();
 
   server.register(import('~/modules/auth/main/routes'));
@@ -10,5 +10,3 @@ async function bootstrap() {
     console.log('Server is running');
   });
 }
-
-bootstrap();
