@@ -4,7 +4,7 @@ export const hashConfig: HashConfig = {
   drivers: {
     argon: {
       driver: 'argon2',
-      variant: 'argon2i',
+      variant: 'argon2id',
       memory: 4096,
       iterations: 3,
       parallelism: 1,
@@ -33,19 +33,19 @@ export declare namespace HashConfigContract {
     saltSize: number;
   };
 
-  interface HashersList {
-    bcrypt: {
-      config: BcryptConfig;
-    };
+  interface HashersDrivers {
     argon: {
       config: ArgonConfig;
+    };
+    bcrypt: {
+      config: BcryptConfig;
     };
   }
 }
 
 export interface HashConfig {
-  default: keyof HashConfigContract.HashersList;
+  default: keyof HashConfigContract.HashersDrivers;
   drivers: {
-    [P in keyof HashConfigContract.HashersList]: HashConfigContract.HashersList[P]['config'];
+    [P in keyof HashConfigContract.HashersDrivers]: HashConfigContract.HashersDrivers[P]['config'];
   };
 }

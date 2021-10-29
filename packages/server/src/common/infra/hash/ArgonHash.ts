@@ -1,15 +1,24 @@
 import * as argon from 'argon2';
 
 import { HashContract } from '~/common';
+import { HashConfigContract } from '~/config/hash';
 
 export class ArgonHash implements HashContract {
-  constructor(private readonly config: argon.Options) {}
+  constructor(private readonly options: HashConfigContract.ArgonConfig) {}
 
   public make(value: string): Promise<string> {
-    return argon.hash(value, { ...this.config, raw: false });
+    const { iterations, memory, parallelism, saltSize, variant } = this.options;
+
+    return argon.hash(value, {
+      type: argon[variant],
+      memoryCost: memory,
+      parallelism,
+      saltLength: saltSize,
+      timeCost: iterations
+    });
   }
 
   public verify(hashedValue: string, plainTextValue: string): Promise<boolean> {
-    return argon.verify(hashedValue, plainTextValue, this.config);
+    return argon.verify(hashedValue, plainTextValue);
   }
 }

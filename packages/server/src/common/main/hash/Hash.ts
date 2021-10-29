@@ -3,7 +3,7 @@ import { ArgonHash, BcryptHash } from '~/common/infra';
 import { hashConfig, HashConfigContract } from '~/config/hash';
 
 export function makeHash(
-  _driver?: keyof HashConfigContract.HashersList
+  _driver?: keyof HashConfigContract.HashersDrivers
 ): HashContract {
   const driver = _driver || hashConfig.default;
 
