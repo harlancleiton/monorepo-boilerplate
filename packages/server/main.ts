@@ -2,12 +2,12 @@ import 'reflect-metadata';
 
 import dotenv from 'dotenv';
 
-import { startHttpServer } from '~/start/httpServer';
+import { startServer } from '~/start/server';
 
 async function bootstrap() {
   dotenv.config();
 
-  await startHttpServer();
+  await startServer();
 }
 
 bootstrap();
