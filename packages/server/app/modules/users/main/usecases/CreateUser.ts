@@ -1,9 +1,9 @@
 import { makeHash } from '~/common/main/hash';
-import { MockUserRepository } from '~/tests/mocks';
 
 import { DbCreateUser } from '../../data';
 import { CreateUser } from '../../domain';
+import { makeUserRepository } from '../repositories';
 
 export function makeCreateUser(): CreateUser {
-  return new DbCreateUser(new MockUserRepository(), makeHash());
+  return new DbCreateUser(makeUserRepository(), makeHash());
 }
