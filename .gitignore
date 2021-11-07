@@ -23,7 +23,7 @@ coverage
 # dotenv environment variables file
 /**/.env
 /**/.env.*
-/**/!.env.example
+!/**/.env.example
 
 # OS Specific
 .DS_Store
