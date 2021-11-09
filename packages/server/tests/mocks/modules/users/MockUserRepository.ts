@@ -7,4 +7,8 @@ export class MockUserRepository implements UserRepository {
   public create(partial: DeepPartial<UserModel>): Promise<UserModel> {
     return Promise.resolve(factories.users.user.build(partial));
   }
+
+  public findUserByEmail(email: string): Promise<UserModel> {
+    return Promise.resolve(factories.users.user.build({ email }));
+  }
 }
