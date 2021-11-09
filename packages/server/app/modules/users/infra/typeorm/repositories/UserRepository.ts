@@ -16,7 +16,7 @@ export class TypeORMUserRepository implements UserRepository {
     return user;
   }
 
-  public findUserByEmail(email: string): Promise<UserModel> {
+  public findOneByEmail(email: string): Promise<UserModel> {
     return this.typeORMRepository.findOne({ where: { email } });
   }
 }
