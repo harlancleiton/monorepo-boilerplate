@@ -1,5 +1,5 @@
 import { createUserFactory } from './createUserFactory';
-import { userFactory } from './userfactory';
+import { userFactory } from './userFactory';
 
 export const usersFactories = {
   createUser: createUserFactory,
