@@ -11,12 +11,28 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid()) @db.Uuid
-  firstName String    @db.VarChar(30)
-  lastName  String    @db.VarChar(100)
-  email     String    @unique @db.VarChar(255)
-  password  String    @unique @db.VarChar(255)
-  birthDate DateTime?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id         String      @id @default(uuid()) @db.Uuid
+  firstName  String      @db.VarChar(30)
+  lastName   String      @db.VarChar(100)
+  email      String      @unique @db.VarChar(255)
+  password   String      @unique @db.VarChar(255)
+  birthDate  DateTime?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  UserTokens UserToken[]
+}
+
+model UserToken {
+  id        String        @id @default(uuid()) @db.Uuid
+  token     String        @unique @default(uuid()) @db.Uuid
+  type      UserTokenType
+  user      User          @relation(fields: [userId], references: [id])
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  userId    String        @db.Uuid
+}
+
+enum UserTokenType {
+  ACCESS_TOKEN   @map(name: "access_token")
+  REFRESH_TOKEN  @map(name: "refresh_token")
 }
