@@ -1,8 +1,8 @@
-import { getRepository } from 'typeorm';
+import { PrismaClientConnection } from '~/common';
 
 import { UserRepository } from '../../data';
-import { TypeORMUserRepository, UserEntity } from '../../infra';
+import { PrismaUserRepository } from '../../infra';
 
 export function makeUserRepository(): UserRepository {
-  return new TypeORMUserRepository(getRepository(UserEntity));
+  return new PrismaUserRepository(PrismaClientConnection.getInstance());
 }
