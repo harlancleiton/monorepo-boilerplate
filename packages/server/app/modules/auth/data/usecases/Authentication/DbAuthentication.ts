@@ -1,6 +1,9 @@
+import {
+  Authentication,
+  CredentialsModel,
+  SessionModel
+} from '~/modules/auth/domain';
 import { UserRepository } from '~/modules/users/data';
-
-import { Authentication, CredentialsModel, SessionModel } from '../../domain';
 
 export class DbAuthentication implements Authentication {
   constructor(private readonly userRepository: UserRepository) {}

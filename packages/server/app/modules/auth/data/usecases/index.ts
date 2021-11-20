@@ -1,1 +1,1 @@
-export * from './DbAuthentication';
+export * from './Authentication';
