@@ -10,7 +10,7 @@
     "lint": "echo >> /dev/null"
   },
   "dependencies": {
-    "axios": "^0.22.0"
+    "axios": "^0.24.0"
   },
   "devDependencies": {
     "rimraf": "^3.0.2"
