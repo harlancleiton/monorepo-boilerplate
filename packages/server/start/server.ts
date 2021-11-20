@@ -11,10 +11,12 @@ export async function startServer() {
     if (error) {
       // eslint-disable-next-line no-console
       console.log(error);
-      process.exit(1);
+      server.close();
     }
 
     // eslint-disable-next-line no-console
     console.log('Server is running on address:', address);
   });
+
+  return server;
 }
