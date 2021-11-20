@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "sourceMap": true,
+  "strict": true,
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -8,6 +9,9 @@
     "module": "commonjs",
     "outDir": "./dist",
     "baseUrl": "./",
+    "lib": [
+      "esnext"
+    ],
     "paths": {
       "~/config/*": [
         "config/*"
