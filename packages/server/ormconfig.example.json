@@ -6,8 +6,8 @@
   "password": "test",
   "database": "test",
   "entities": ["app/modules/**/infra/typeorm/entities/*.entity.ts"],
-  "migrations": ["database/migrations/*.ts"],
+  "migrations": ["database/typeorm/migrations/*.ts"],
   "cli": {
-    "migrationsDir": "database/migrations"
+    "migrationsDir": "database/typeorm/migrations"
   }
 }
