@@ -5,8 +5,8 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es5",
-    "module": "commonjs",
+    "target": "ES2021",
+    "module": "CommonJS",
     "outDir": "./dist",
     "baseUrl": "./",
     "lib": [
