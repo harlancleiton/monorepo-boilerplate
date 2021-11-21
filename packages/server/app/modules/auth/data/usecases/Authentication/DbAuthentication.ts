@@ -1,4 +1,4 @@
-import { HashContract } from '~/common';
+import { HashContract, UnauthorizedException } from '~/common';
 import {
   Authentication,
   CredentialsModel,
@@ -14,6 +14,8 @@ export class DbAuthentication implements Authentication {
 
   public async execute(credentials: CredentialsModel): Promise<SessionModel> {
     const user = await this.userRepository.findOneByEmail(credentials.email);
+
+    if (!user) throw new UnauthorizedException('Email ou senha inválida');
 
     await this.hash.verify(user.password, credentials.password);
 
