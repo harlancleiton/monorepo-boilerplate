@@ -53,4 +53,15 @@ describe('DbAuthentication', () => {
 
     expect(hash.verify).toBeCalledWith(user.password, mockPlainPassword);
   });
+
+  it('should be throw UnauthorizedException if password is not match', async () => {
+    const user = factories.users.user.build();
+
+    jest.spyOn(userRepository, 'findOneByEmail').mockResolvedValueOnce(user);
+    jest.spyOn(hash, 'verify').mockResolvedValueOnce(false);
+
+    await expect(
+      sut.execute({ email: user.email, password: user.password })
+    ).rejects.toThrow(UnauthorizedException);
+  });
 });
