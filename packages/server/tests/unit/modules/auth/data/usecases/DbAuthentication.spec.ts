@@ -1,4 +1,4 @@
-import { HashContract } from '~/common';
+import { HashContract, UnauthorizedException } from '~/common';
 import { DbAuthentication } from '~/modules/auth/data';
 import { UserRepository } from '~/modules/users/data';
 import { factories } from '~/tests/factories';
@@ -27,6 +27,19 @@ describe('DbAuthentication', () => {
     await sut.execute({ email: user.email, password: user.password });
 
     expect(userRepository.findOneByEmail).toBeCalledWith(user.email);
+  });
+
+  it('should be throw UnauthorizedException if user is undefined', async () => {
+    const user = factories.users.user.build();
+
+    jest.spyOn(userRepository, 'findOneByEmail').mockReturnValueOnce(undefined);
+    jest.spyOn(hash, 'verify');
+
+    await expect(
+      sut.execute({ email: user.email, password: user.password })
+    ).rejects.toThrow(UnauthorizedException);
+
+    expect(hash.verify).not.toBeCalled();
   });
 
   it('should be call hash with correct values', async () => {
