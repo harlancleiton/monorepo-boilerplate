@@ -14,7 +14,7 @@ export class SessionManagerAdapter implements SessionManagerContract {
   ) {}
 
   public async create(user: UserModel): Promise<SessionModel> {
-    const accessToken = await this.tokenManager.encode({ sub: user.id });
+    const accessToken = await this.tokenManager.encode(user);
 
     const refreshToken = await this.userTokenRepository.create({
       type: UserTokenType.REFRESH_TOKEN,
