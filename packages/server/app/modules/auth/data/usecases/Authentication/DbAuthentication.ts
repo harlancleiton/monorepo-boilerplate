@@ -6,10 +6,13 @@ import {
 } from '~/modules/auth/domain';
 import { UserRepository } from '~/modules/users/data';
 
+import { SessionManagerContract } from '../../contracts';
+
 export class DbAuthentication implements Authentication {
   constructor(
     private readonly userRepository: UserRepository,
-    private readonly hash: HashContract
+    private readonly hash: HashContract,
+    private readonly sessionManager: SessionManagerContract
   ) {}
 
   public async execute(credentials: CredentialsModel): Promise<SessionModel> {
@@ -24,7 +27,7 @@ export class DbAuthentication implements Authentication {
 
     if (!passwordIsMatch) throw this.getUnauthorizedException();
 
-    return null;
+    return this.sessionManager.create(user);
   }
 
   private getUnauthorizedException(): UnauthorizedException {
