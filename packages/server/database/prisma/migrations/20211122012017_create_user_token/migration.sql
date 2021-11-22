@@ -1,11 +1,12 @@
 -- CreateEnum
-CREATE TYPE "UserTokenType" AS ENUM ('access_token', 'refresh_token');
+CREATE TYPE "UserTokenType" AS ENUM ('recover_password', 'refresh_token');
 
 -- CreateTable
 CREATE TABLE "UserToken" (
     "id" UUID NOT NULL,
     "token" UUID NOT NULL,
     "type" "UserTokenType" NOT NULL,
+    "isRevoked" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" UUID NOT NULL,

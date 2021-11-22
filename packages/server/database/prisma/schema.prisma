@@ -26,6 +26,7 @@ model UserToken {
   id        String        @id @default(uuid()) @db.Uuid
   token     String        @unique @default(uuid()) @db.Uuid
   type      UserTokenType
+  isRevoked Boolean       @default(false)
   user      User          @relation(fields: [userId], references: [id])
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
@@ -33,6 +34,6 @@ model UserToken {
 }
 
 enum UserTokenType {
-  ACCESS_TOKEN   @map(name: "access_token")
-  REFRESH_TOKEN  @map(name: "refresh_token")
+  recover_password
+  refresh_token
 }
