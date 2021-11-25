@@ -1,10 +1,11 @@
 import { HashContract, UnauthorizedException } from '~/common';
-import { DbAuthentication, SessionManagerContract } from '~/modules/auth/data';
+import { DbAuthentication } from '~/modules/auth/data';
+import { CreateSessionTokens } from '~/modules/auth/domain';
 import { UserRepository } from '~/modules/users/data';
 import { factories } from '~/tests/factories';
 import {
+  MockCreateSessionTokens,
   MockHash,
-  MockSessionManager,
   MockUserRepository
 } from '~/tests/mocks';
 
@@ -12,13 +13,13 @@ describe('DbAuthentication', () => {
   let sut: DbAuthentication;
   let userRepository: UserRepository;
   let hash: HashContract;
-  let sessionManager: SessionManagerContract;
+  let createSessionTokens: CreateSessionTokens;
 
   beforeEach(() => {
     userRepository = new MockUserRepository();
     hash = new MockHash();
-    sessionManager = new MockSessionManager();
-    sut = new DbAuthentication(userRepository, hash, sessionManager);
+    createSessionTokens = new MockCreateSessionTokens();
+    sut = new DbAuthentication(userRepository, hash, createSessionTokens);
   });
 
   it('should be defined', () => {
@@ -40,14 +41,14 @@ describe('DbAuthentication', () => {
 
     jest.spyOn(userRepository, 'findOneByEmail').mockReturnValueOnce(undefined);
     jest.spyOn(hash, 'verify');
-    jest.spyOn(sessionManager, 'create');
+    jest.spyOn(createSessionTokens, 'execute');
 
     await expect(
       sut.execute({ email: user.email, password: user.password })
     ).rejects.toThrow(UnauthorizedException);
 
     expect(hash.verify).not.toBeCalled();
-    expect(sessionManager.create).not.toBeCalled();
+    expect(createSessionTokens.execute).not.toBeCalled();
   });
 
   it('should be call hash with correct values', async () => {
@@ -67,13 +68,13 @@ describe('DbAuthentication', () => {
 
     jest.spyOn(userRepository, 'findOneByEmail').mockResolvedValueOnce(user);
     jest.spyOn(hash, 'verify').mockResolvedValueOnce(false);
-    jest.spyOn(sessionManager, 'create');
+    jest.spyOn(createSessionTokens, 'execute');
 
     await expect(
       sut.execute({ email: user.email, password: user.password })
     ).rejects.toThrow(UnauthorizedException);
 
-    expect(sessionManager.create).not.toBeCalled();
+    expect(createSessionTokens.execute).not.toBeCalled();
   });
 
   it('should be call sessionManager with correct values', async () => {
@@ -82,10 +83,10 @@ describe('DbAuthentication', () => {
 
     jest.spyOn(userRepository, 'findOneByEmail').mockResolvedValueOnce(user);
     jest.spyOn(hash, 'verify').mockResolvedValueOnce(true);
-    jest.spyOn(sessionManager, 'create');
+    jest.spyOn(createSessionTokens, 'execute');
 
     await sut.execute({ email: user.email, password: mockPlainPassword });
 
-    expect(sessionManager.create).toBeCalledWith(user);
+    expect(createSessionTokens.execute).toBeCalledWith(user);
   });
 });
