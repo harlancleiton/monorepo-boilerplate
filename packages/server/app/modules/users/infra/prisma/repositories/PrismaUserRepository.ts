@@ -10,7 +10,11 @@ export class PrismaUserRepository implements UserRepository {
     return this.prismaClient.user.create({ data: input });
   }
 
-  public findOneByEmail(email: string): Promise<UserModel> {
+  public findById(id: string): Promise<UserModel | undefined> {
+    return this.prismaClient.user.findUnique({ where: { id } });
+  }
+
+  public findOneByEmail(email: string): Promise<UserModel | undefined> {
     return this.prismaClient.user.findUnique({ where: { email } });
   }
 }
