@@ -1,18 +1,17 @@
 import { HashContract, UnauthorizedException } from '~/common';
 import {
   Authentication,
+  CreateSessionTokens,
   CredentialsModel,
   SessionModel
 } from '~/modules/auth/domain';
 import { UserRepository } from '~/modules/users/data';
 
-import { SessionManagerContract } from '../../contracts';
-
 export class DbAuthentication implements Authentication {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly hash: HashContract,
-    private readonly sessionManager: SessionManagerContract
+    private readonly createSession: CreateSessionTokens
   ) {}
 
   public async execute(credentials: CredentialsModel): Promise<SessionModel> {
@@ -27,7 +26,9 @@ export class DbAuthentication implements Authentication {
 
     if (!passwordIsMatch) throw this.getUnauthorizedException();
 
-    return this.sessionManager.create(user);
+    const sessionTokens = await this.createSession.execute(user);
+
+    return { user, ...sessionTokens };
   }
 
   private getUnauthorizedException(): UnauthorizedException {
