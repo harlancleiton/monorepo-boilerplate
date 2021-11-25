@@ -1,4 +1,4 @@
-import { UserTokenModel } from '../../domain/models/UserToken';
+import { UserTokenModel } from '../../domain';
 import { CreateUserTokenInput } from '../inputs';
 
 export interface UserTokenRepository {
