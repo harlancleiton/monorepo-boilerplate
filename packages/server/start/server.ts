@@ -10,7 +10,7 @@ export async function startServer() {
   server.listen(appConfig.port, appConfig.host, (error, address) => {
     if (error) {
       // eslint-disable-next-line no-console
-      console.log(error);
+      console.error(error);
       server.close();
     }
 
