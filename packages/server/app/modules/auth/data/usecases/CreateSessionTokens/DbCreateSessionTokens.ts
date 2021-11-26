@@ -1,3 +1,4 @@
+import { EncrypterContract } from '~/common';
 import {
   CreateSessionTokens,
   SessionTokensModel,
@@ -13,7 +14,8 @@ export class DbCreateSessionTokens implements CreateSessionTokens {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly userTokenRepository: UserTokenRepository,
-    private readonly tokenManager: TokenManagerContract
+    private readonly tokenManager: TokenManagerContract,
+    private readonly encrypter: EncrypterContract
   ) {}
 
   public execute(user: UserModel): Promise<SessionTokensModel>;
@@ -31,7 +33,9 @@ export class DbCreateSessionTokens implements CreateSessionTokens {
       user
     });
 
-    return { accessToken, refreshToken: refreshToken.token };
+    const encryptedRefreshToken = this.encrypter.encrypt(refreshToken.token);
+
+    return { accessToken, refreshToken: encryptedRefreshToken };
   }
 
   private getUser(userOrUserId: string | UserModel): Promise<UserModel> {
