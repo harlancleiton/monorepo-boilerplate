@@ -1,6 +1,6 @@
 import { RouteHandlerMethod } from 'fastify';
 
-import { ControllerContract } from '~/common';
+import { ControllerContract } from '~/common/presentation';
 
 import { FastifyReplyAdapter } from './FastifyReplyAdapter';
 import { FastifyRequestAdapter } from './FastifyRequestAdapter';

@@ -1,6 +1,6 @@
 import { FastifyReply } from 'fastify';
 
-import { ResponseContract, ValidationError } from '~/common';
+import { ResponseContract, ValidationError } from '~/common/presentation';
 
 export class FastifyReplyAdapter implements ResponseContract {
   constructor(private readonly reply: FastifyReply) {}

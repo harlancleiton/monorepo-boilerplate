@@ -1,6 +1,6 @@
 import { FastifyRequest } from 'fastify';
 
-import { RequestContract } from '~/common';
+import { RequestContract } from '~/common/presentation';
 
 export class FastifyRequestAdapter implements RequestContract {
   constructor(private readonly request: FastifyRequest) {}
