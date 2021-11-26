@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
 import { CreateUserTokenInput, UserTokenRepository } from '~/modules/auth/data';
-import { UserTokenModel, UserTokenType } from '~/modules/auth/domain';
+import { UserTokenModel } from '~/modules/auth/domain';
 
 export class PrismaUserTokenRepository implements UserTokenRepository {
   constructor(private readonly prismaClient: PrismaClient) {}
@@ -16,7 +16,7 @@ export class PrismaUserTokenRepository implements UserTokenRepository {
 
     return {
       ...userToken,
-      type: UserTokenType[userToken.type],
+      type: input.type,
       user: input.user
     };
   }
