@@ -3,7 +3,7 @@ export const encrypterConfig: EncrypterConfig = {
 
   encrypters: {
     'aes-256-cbc': {
-      secret: process.env.ENCRYPTER_SECRET,
+      secret: process.env.ENCRYPTER_SECRET || 'secret',
       ivLength: 16
     }
   }

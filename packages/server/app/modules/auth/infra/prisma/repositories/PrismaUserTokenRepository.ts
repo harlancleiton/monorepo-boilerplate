@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
 import { CreateUserTokenInput, UserTokenRepository } from '~/modules/auth/data';
-import { UserTokenModel } from '~/modules/auth/domain';
+import { UserTokenModel, UserTokenType } from '~/modules/auth/domain';
 
 export class PrismaUserTokenRepository implements UserTokenRepository {
   constructor(private readonly prismaClient: PrismaClient) {}
@@ -18,6 +18,20 @@ export class PrismaUserTokenRepository implements UserTokenRepository {
       ...userToken,
       type: input.type,
       user: input.user
+    };
+  }
+
+  public async findByToken(token: string): Promise<UserTokenModel | null> {
+    const userToken = await this.prismaClient.userToken.findUnique({
+      where: { token },
+      include: { user: true }
+    });
+
+    if (!userToken) return null;
+
+    return {
+      ...userToken,
+      type: userToken.type as UserTokenType
     };
   }
 }

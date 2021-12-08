@@ -18,8 +18,9 @@ export class MonorepoException extends Error {
     ) {
       this.message = this.response.message;
     } else {
+      // @ts-ignore
       this.message = this.constructor.name
-        .match(/[A-Z][a-z]+|[0-9]+/g)
+        ?.match(/[A-Z][a-z]+|[0-9]+/g)
         .join(' ');
     }
   }

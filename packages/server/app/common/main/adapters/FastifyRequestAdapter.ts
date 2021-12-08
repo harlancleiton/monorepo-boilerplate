@@ -14,7 +14,10 @@ export class FastifyRequestAdapter implements RequestContract {
   }
 
   public param<T = string>(key: string, defaultValue?: T): T {
-    return this.request.params[key] || (defaultValue as any);
+    if (!this.request.params) return defaultValue as any;
+
+    const params = this.request.params as any;
+    return params[key] || (defaultValue as any);
   }
 
   public query<T = Record<string, string>>(): T {

@@ -1,4 +1,10 @@
+import { UserModel } from '~/modules/users/domain';
+
+export interface TokenPayload {
+  sub: string;
+}
+
 export interface TokenManagerContract {
-  encode(payload: string | Buffer | object): Promise<string>;
-  decode<T = any>(token: string): Promise<T>;
+  encode(user: UserModel): Promise<string>;
+  decode<T extends TokenPayload = TokenPayload>(token: string): Promise<T>;
 }

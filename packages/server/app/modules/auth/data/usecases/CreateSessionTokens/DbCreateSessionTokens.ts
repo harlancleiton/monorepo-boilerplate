@@ -1,4 +1,4 @@
-import { EncrypterContract } from '~/common';
+import { EncrypterContract, UnauthorizedException } from '~/common';
 import {
   CreateSessionTokens,
   SessionTokensModel,
@@ -26,6 +26,8 @@ export class DbCreateSessionTokens implements CreateSessionTokens {
   ): Promise<SessionTokensModel> {
     const user = await this.getUser(userOrUserId);
 
+    if (!user) throw new UnauthorizedException();
+
     const accessToken = await this.tokenManager.encode(user);
 
     const refreshToken = await this.userTokenRepository.create({
@@ -38,7 +40,7 @@ export class DbCreateSessionTokens implements CreateSessionTokens {
     return { accessToken, refreshToken: encryptedRefreshToken };
   }
 
-  private getUser(userOrUserId: string | UserModel): Promise<UserModel> {
+  private getUser(userOrUserId: string | UserModel): Promise<UserModel | null> {
     if (typeof userOrUserId !== 'string') return Promise.resolve(userOrUserId);
 
     return this.userRepository.findById(userOrUserId);

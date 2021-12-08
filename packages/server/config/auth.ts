@@ -8,7 +8,7 @@ export const authConfig: AuthConfig = {
   drivers: {
     jwt: {
       expiresIn: process.env.JWT_EXPIRES_IN || '5m',
-      secret: process.env.JWT_SECRET_KEY,
+      secret: process.env.JWT_SECRET_KEY || 'secret',
       subject: 'id',
       issuer: appConfig.name
     }

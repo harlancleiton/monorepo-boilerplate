@@ -2,13 +2,14 @@ import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
 
 import { AuthConfigContract } from '~/config/auth';
+import { UserModel } from '~/modules/users/domain';
 
 import { TokenManagerContract } from '../../data';
 
 export class JwtTokenManager implements TokenManagerContract {
   constructor(private readonly options: AuthConfigContract.JwtConfig) {}
 
-  public encode(payload: string | object | Buffer): Promise<string> {
+  public encode(user: UserModel): Promise<string> {
     const sign = promisify(
       jwt.sign as (
         payload: string | Buffer | object,
@@ -18,18 +19,12 @@ export class JwtTokenManager implements TokenManagerContract {
       ) => void
     );
 
-    if (typeof payload === 'string' || payload instanceof Buffer)
-      return sign(payload, this.options.secret, {
-        expiresIn: this.options.expiresIn,
-        issuer: this.options.issuer
-      });
-
-    const subject = payload[this.options.subject];
+    const subject = user[this.options.subject];
 
     return sign({ sub: subject }, this.options.secret, {
       expiresIn: this.options.expiresIn,
       issuer: this.options.issuer
-    });
+    }) as Promise<string>;
   }
 
   public decode<T = any>(token: string): Promise<T> {
