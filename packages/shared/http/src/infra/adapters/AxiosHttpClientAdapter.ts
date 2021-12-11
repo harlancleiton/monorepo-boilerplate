@@ -10,7 +10,7 @@ export class AxiosHttpClient implements HttpClient {
     this.axiosInstance = axios.create(config);
   }
 
-  request<RequestT>(data: HttpRequest): Promise<HttpResponse<RequestT>> {
+  public request<RequestT>(data: HttpRequest): Promise<HttpResponse<RequestT>> {
     return this.axiosInstance.request(data);
   }
 }
