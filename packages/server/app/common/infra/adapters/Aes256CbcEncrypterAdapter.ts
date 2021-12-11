@@ -29,7 +29,7 @@ export class Aes256CbcEncrypterAdapter implements EncrypterContract {
     const secretBuffer = Buffer.from(this.encrypterConfig.secret);
 
     const decipher = crypto.createDecipheriv(
-      'aes-256-cdc',
+      'aes-256-cbc',
       secretBuffer,
       ivBuffer
     );
