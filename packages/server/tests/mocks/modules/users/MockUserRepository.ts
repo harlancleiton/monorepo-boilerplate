@@ -11,4 +11,8 @@ export class MockUserRepository implements UserRepository {
   public findOneByEmail(email: string): Promise<UserModel> {
     return Promise.resolve(factories.users.user.build({ email }));
   }
+
+  public findById(id: string): Promise<UserModel | null> {
+    return Promise.resolve(factories.users.user.build({ id }));
+  }
 }
