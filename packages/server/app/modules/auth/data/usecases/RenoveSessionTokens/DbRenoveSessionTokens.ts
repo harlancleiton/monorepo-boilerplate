@@ -19,7 +19,7 @@ export class DbRenoveSessionTokens implements RenoveSessionTokens {
   public async execute(
     oldTokens: SessionTokensModel
   ): Promise<SessionTokensModel> {
-    const { sub: subject } = await this.tokenManager.decode<{ sub: string }>(
+    const { sub: subject } = await this.tokenManager.decode(
       oldTokens.accessToken
     );
     const decryptedRefreshToken = this.encrypter.decrypt(
