@@ -12,6 +12,7 @@
     ]
   },
   "scripts": {
+    "build": "yarn workspaces run build",
     "dev": "yarn workspaces run dev",
     "format": "yarn workspaces run format",
     "lint": "yarn workspaces run lint",
