@@ -39,7 +39,7 @@ describe('DbAuthentication', () => {
   it('should be throw UnauthorizedException if user is undefined', async () => {
     const user = factories.users.user.build();
 
-    jest.spyOn(userRepository, 'findOneByEmail').mockReturnValueOnce(undefined);
+    jest.spyOn(userRepository, 'findOneByEmail').mockResolvedValue(null);
     jest.spyOn(hash, 'verify');
     jest.spyOn(createSessionTokens, 'execute');
 
